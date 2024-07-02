@@ -73,13 +73,13 @@ jobs:
         
    #Login in your azure subscription using a service principal (credentials stored as GitHub Secret in repo)
     - name: Azure Login
-      uses: azure/login@v2
+      uses: azure/login@v4
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
            
     # Deploy Azure WebApp using Bicep file
     - name: deploy
-      uses: azure/arm-deploy@v2
+      uses: azure/arm-deploy@v4
       with:
         subscriptionId: ${{ env.SUBSCRIPTION-ID }}
         resourceGroupName: ${{ env.RESOURCE-GROUP }}
@@ -99,7 +99,7 @@ jobs:
 
     # Publish website to Azure App Service using CLI (WebApp)
     - name: Publish Website to WebApp
-      uses: Azure/cli@v2
+      uses: Azure/cli@v4
       with:
         inlineScript: |
              az webapp deploy --name ${{ env.WEBAPP-NAME }} --resource-group ${{ env.RESOURCE-GROUP }} --src-path .net-app/app.zip --type zip
