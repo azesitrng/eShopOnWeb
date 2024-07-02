@@ -5,7 +5,7 @@ on: workflow_dispatch
 
 #Environment variables https://docs.github.com/en/actions/learn-github-actions/environment-variables
 env:
-  RESOURCE-GROUP: rg-eshoponweb-westeurope
+  RESOURCE-GROUP: rg-eshpoonweb-westeurope
   LOCATION: westeurope
   TEMPLATE-FILE: infra/webapp.bicep
   SUBSCRIPTION-ID: 6fe488a3-0f1b-44bc-a387-bc69af60ed60
@@ -79,7 +79,7 @@ jobs:
            
     # Deploy Azure WebApp using Bicep file
     - name: deploy
-      uses: azure/arm-deploy@v4
+      uses: azure/arm-deploy@v2
       with:
         subscriptionId: ${{ env.SUBSCRIPTION-ID }}
         resourceGroupName: ${{ env.RESOURCE-GROUP }}
@@ -99,7 +99,7 @@ jobs:
 
     # Publish website to Azure App Service using CLI (WebApp)
     - name: Publish Website to WebApp
-      uses: Azure/cli@v4
+      uses: Azure/cli@v2
       with:
         inlineScript: |
              az webapp deploy --name ${{ env.WEBAPP-NAME }} --resource-group ${{ env.RESOURCE-GROUP }} --src-path .net-app/app.zip --type zip
